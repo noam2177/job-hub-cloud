@@ -1,6 +1,6 @@
 # P2-01 — Event taxonomy and field dictionary (D-1, D-2)
 
-Status: **proposed**. Owner approves in `DECISIONS.md` (D-1, D-2). Title families need Noam's list.
+Status: **approved 2026-09-28** (D-1, D-2, D-11 in `DECISIONS.md`).
 
 ## Sources (read-only; this project never writes them)
 
@@ -41,7 +41,7 @@ The exporter is **snapshot-diff + deterministic event ids**: re-running it emits
 
 **Never exported:** `notes`, `job_text`, `reply_from`, `reply_subject`, `reply_message_id`, `submit_note`, `blocker`, `verification`, `cv_pdf`/`cv_docx` paths, `spark_task_id`, full `source_url`, any e-mail or phone.
 
-## title_family (draft — Noam to confirm/rename)
+## title_family (approved, D-11)
 
 `data_analyst`, `bi_analyst`, `data_scientist`, `ml_engineer`, `data_engineer`, `software_engineer`, `research`, `other`.
 

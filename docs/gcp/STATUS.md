@@ -25,8 +25,9 @@ Next is Noam's cloud/label work. P3 frozen until P1/P2/P4/P5 run clean.
 ## Blocked
 - GLM review: Hub session call cap (`GLM_MAX_CALLS_SESSION`). Issue #14.
 
-## Open decisions
-D-1, D-2, D-6, D-7, D-9 (see `DECISIONS.md`).
+## Decisions
+Approved 2026-09-28: D-1, D-2, D-11 (title families), D-6 (no Tailscale), D-7 (CV local only), D-9 (P3 verifies Spark).
+Open: none.
 
 ## Cost to date
 Cloud $0. Local Ollama $0. GLM $0.

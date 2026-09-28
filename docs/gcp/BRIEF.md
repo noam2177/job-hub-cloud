@@ -38,7 +38,7 @@ E0: Noam sends a job link on the **intake bot** (Telegram) or drops a file into 
 
 | # | Rule |
 |---|---|
-| R1 | GREEN (public job ads, owner's own code) may go to the cloud. RED (Sagole, `real_inputs`, ID numbers, real ground truth) never leaves the machine. The owner's CV/contact data is **AMBER**: local only unless sanitized and approved per D-7. |
+| R1 | GREEN (public job ads, owner's own code) may go to the cloud. RED (Sagole, `real_inputs`, ID numbers, real ground truth) never leaves the machine. The owner's CV/contact data is **AMBER**: local PC only, never uploaded to GCP (D-7). |
 | R2 | **No new writers to existing stores.** This project never writes `statedb.db`, `orchestration.db`, or the Hub ledger (`jobs.json`, `applications.jsonl`). Links go through the Hub loopback API. This project's only local store is `state/jobhub_local.db`, written only by the local dispatcher. The only BigQuery writer is `jobs_pipeline/bq_exporter.py`. |
 | R3 | Outbound-only locally. No inbound ports. Tasks arrive by pull. The VM also has no public ingress (IAP SSH only). |
 | R4 | Telegram text, Drive files, ads and OCR output are untrusted → `jobs_pipeline/sanitize.py` before any LLM. LLM output never executes; only allow-listed handlers run. |

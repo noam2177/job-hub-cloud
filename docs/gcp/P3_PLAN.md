@@ -19,8 +19,9 @@ Spark already writes tailored CVs from the master CV (`ledger/cv_requests/*.json
 
 | Step | Engine | Cost | When |
 |---|---|---|---|
-| P3-06 | local lexical (BM25) + local embeddings via Ollama, SQLite | $0 | first |
-| P3-03/05 | Vertex AI Search Standard | free quota, then ~$1.50/1k queries | only if P3-06 recall@3 < 80% and D-7 approves upload |
+| P3-06 | local lexical (BM25) + local embeddings via Ollama, SQLite | $0 | the only path (D-7: the CV never leaves the PC) |
+
+P3-03 (Vertex AI Search) is cancelled by D-7.
 
 ## Evaluation (P3-04/05)
 `data/rag_eval_template.csv`: `posting_id, posting_text_file, expected_projects (pipe-separated), notes`.

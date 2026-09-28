@@ -22,7 +22,7 @@ cd C:\Users\noam1\Documents\GitHub\job-hub-cloud
 
 Send back: the JSON report (counts and reason codes only).
 
-## Step 1 — decisions (reply in chat)
+## Step 1 — decisions ✔ done 2026-09-28 (D-1, D-2, D-11, D-6, D-7, D-9 approved)
 
 - D-1 taxonomy and D-2 export allow-list in `P2_TAXONOMY.md`: approve or edit.
 - Title families: confirm or rename `data_analyst, bi_analyst, data_scientist, ml_engineer, data_engineer, software_engineer, research, other`.

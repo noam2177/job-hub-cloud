@@ -13,3 +13,9 @@
 | D-8 | 2026-09-28 | BigQuery writes via batch load jobs (free), dedupe in views | streaming insert with row_ids | Cursor |
 | D-9 | 2026-09-28 | P3 does not re-write CVs (Spark does); P3 = evidence verifier of Spark output + cover-letter draft | P3 drafts CVs itself | **proposed** |
 | D-10 | 2026-09-28 | Ground-truth fixtures are template-based, not LLM-generated (qwen2.5:7b produced broken Hebrew) | LLM fixtures | Cursor |
+| D-1 ✔ | 2026-09-28 | **Approved** as proposed: event taxonomy in `P2_TAXONOMY.md` | — | Noam |
+| D-2 ✔ | 2026-09-28 | **Approved** as proposed: export allow-list in `P2_TAXONOMY.md` | — | Noam |
+| D-11 | 2026-09-28 | **Approved**: title families `data_analyst, bi_analyst, data_scientist, ml_engineer, data_engineer, software_engineer, research, other` (closed list in `jobs_pipeline/title_family.py`) | rename/add families | Noam |
+| D-6 ✔ | 2026-09-28 | **Approved**: no Tailscale; admin access is IAP SSH only (P1-03 removed) | Tailscale admin mesh | Noam |
+| D-7 ✔ | 2026-09-28 | **Approved**: CV / master profile stays on the local PC only; never uploaded to GCP (no Vertex AI Search over the CV) | sanitized upload | Noam |
+| D-9 ✔ | 2026-09-28 | **Approved**: P3 verifies Spark's tailored CVs against the master CV and drafts cover letters; it never writes CVs | P3 writes CVs | Noam |
