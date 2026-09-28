@@ -1,0 +1,7 @@
+[Unit]
+Description=Job Hub listener heartbeat watchdog
+
+[Service]
+Type=oneshot
+# Runs as root: restarting the listener unit requires it. The script only reads the heartbeat file.
+ExecStart=/opt/jobhub-cloud/scripts/healthcheck_listener.sh

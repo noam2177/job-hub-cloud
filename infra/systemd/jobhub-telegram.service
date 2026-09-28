@@ -1,0 +1,23 @@
+[Unit]
+Description=Job Hub Telegram intake listener
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=jobhub
+Group=jobhub
+WorkingDirectory=/opt/jobhub-cloud
+Environment=JOBHUB_STATE_DIR=/var/lib/jobhub
+Environment=TOKEN_FROM_SECRET_MANAGER=1
+Environment=GOOGLE_CLOUD_PROJECT=%i
+ExecStart=/opt/jobhub-cloud/.venv/bin/python -m cloud.telegram_listener
+Restart=always
+RestartSec=10
+MemoryMax=300M
+NoNewPrivileges=yes
+ProtectSystem=strict
+ReadWritePaths=/var/lib/jobhub
+
+[Install]
+WantedBy=multi-user.target
