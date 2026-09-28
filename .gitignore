@@ -1,0 +1,35 @@
+# Secrets and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*credentials*.json
+*service-account*.json
+*-sa-key*.json
+client_secret*.json
+token*.json
+
+# Local state and data that never leaves the machine
+*.db
+*.db-wal
+*.db-shm
+state/
+data/*
+!data/README.md
+!data/*_template.csv
+out/
+
+# RED paths (defense in depth; they must never be inside this repo)
+**/real_inputs/**
+**/real_ground_truth*.csv
+**/real_benchmark_results*.csv
+**/sagole/**
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.coverage
+htmlcov/

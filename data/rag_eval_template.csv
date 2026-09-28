@@ -1,0 +1,3 @@
+posting_id,posting_text_file,expected_projects,notes
+rag-01,postings/rag-01.txt,he-nlp|tfidf-rank,synthetic example: Hebrew NLP retrieval role
+rag-02,postings/rag-02.txt,finance-router,synthetic example: text classification role

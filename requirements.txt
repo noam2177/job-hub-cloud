@@ -1,0 +1,6 @@
+# Runtime. Cloud clients are imported lazily so tests run without them.
+jsonschema>=4.21
+pydantic>=2.6
+google-cloud-bigquery>=3.17
+google-cloud-pubsub>=2.19
+google-cloud-secret-manager>=2.18

@@ -1,0 +1,21 @@
+{
+  "generator": "qwen2.5:7b",
+  "map": {
+    "Junior Data Analyst": "data_analyst",
+    "אנליסט/ית נתונים": "data_analyst",
+    "BI Developer": "bi_analyst",
+    "Power BI Analyst": "bi_analyst",
+    "Data Scientist - NLP": "data_scientist",
+    "Machine Learning Engineer": "ml_engineer",
+    "MLOps Engineer": "ml_engineer",
+    "Data Engineer (Spark, Airflow)": "data_engineer",
+    "Backend Developer Python": "software_engineer",
+    "Full Stack Developer": "software_engineer",
+    "Research Assistant - Computational Linguistics": "research",
+    "חוקר/ת אלגוריתמים": "research",
+    "Product Analyst": "data_analyst",
+    "מהנדס/ת נתונים": "data_engineer",
+    "LLM Engineer": "ml_engineer",
+    "Customer Success Manager": "other"
+  }
+}

@@ -1,0 +1,7 @@
+jsonschema>=4.21
+pydantic>=2.6
+pytest>=8
+pre-commit>=3.6
+detect-secrets>=1.5
+sqlglot>=23
+duckdb>=1.0

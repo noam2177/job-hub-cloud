@@ -1,0 +1,86 @@
+{
+  "jobs": [
+    {
+      "job_id": "link-aaa111",
+      "title": "Data Analyst — SQL & Python",
+      "company": "Acme BI",
+      "location": "Tel Aviv",
+      "status": "needs_tailored_cv",
+      "created_at_utc": "2025-01-10T08:00:00Z",
+      "source_url": "https://jobs.example.com/1",
+      "source_type": "text",
+      "origin": "telegram",
+      "match_score": 0.82,
+      "notes": "secret notes must not export",
+      "job_text": "full posting body with PII",
+      "reply_from": "hr@example.com"
+    },
+    {
+      "job_id": "link-bbb222",
+      "title": "BI Analyst Looker",
+      "company": "Beta Corp",
+      "status": "not_submitted",
+      "added_at_utc": "2025-01-11T09:00:00Z",
+      "source_url": "https://boards.example.org/bi",
+      "application_type": "form"
+    },
+    {
+      "job_id": "link-ccc333",
+      "title": "Data Scientist ML NLP",
+      "company": "Gamma Labs",
+      "status": "submitted",
+      "created_at_utc": "2025-01-12T10:00:00Z",
+      "sent_at_utc": "2025-01-15T14:00:00Z",
+      "cv_basename": "cv-20250101-data_scientist.pdf",
+      "source_url": "https://careers.example.net/ds"
+    },
+    {
+      "job_id": "link-ddd444",
+      "title": "Software Engineer Backend",
+      "company": "Delta Tech",
+      "status": "sent",
+      "found_at_utc": "2025-01-13T11:00:00Z",
+      "email_sent_at_utc": "2025-01-16T16:00:00Z",
+      "reply_seen_at_utc": "2025-01-20T09:30:00Z",
+      "cv_pdf": "/home/noam/cvs/custom-cv.pdf",
+      "source_url": "https://apply.example.com/se"
+    },
+    {
+      "job_id": "link-eee555",
+      "title": "ML Engineer",
+      "company": "Epsilon AI",
+      "status": "submitted",
+      "created_at_utc": "2025-01-14T12:00:00Z",
+      "source_url": "https://jobs.example.com/ml",
+      "submit_note": "do not leak"
+    },
+    {
+      "job_id": "link-fff666",
+      "title": "Research Scientist",
+      "company": "Zeta Research",
+      "status": "closed",
+      "created_at_utc": "2025-01-05T07:00:00Z",
+      "sent_at_utc": "2025-01-06T08:00:00Z",
+      "source_url": "https://uni.example.edu/r"
+    },
+    {
+      "job_id": "link-ggg777",
+      "title": "Data Engineer Spark GCP",
+      "company": "Eta Data",
+      "status": "needs_tailored_cv",
+      "created_at_utc": "2025-01-18T13:00:00Z",
+      "source_type": "image/png",
+      "source_url": "https://img.example.com/ad.png"
+    },
+    {
+      "job_id": "link-hhh888",
+      "title": "Analytics — Excel & BI",
+      "company": "Theta Analytics",
+      "status": "form_submitted",
+      "created_at_utc": "2025-01-19T14:00:00Z",
+      "form_submitted_at_utc": "2025-01-21T10:00:00Z",
+      "draft_created_at_utc": "2025-01-20T08:00:00Z",
+      "source_url": "https://forms.example.com/x"
+    }
+  ]
+}
