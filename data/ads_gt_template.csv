@@ -1,0 +1,3 @@
+ad_id,image_file,title,company,requirements,location,contact,language,notes
+ad-01,ad-01.png,אנליסט/ית נתונים,דוגמה בע"מ,SQL|Python|Power BI,תל אביב,jobs@example.com,he,synthetic example row - delete before labeling
+ad-02,ad-02.jpg,Data Engineer,Example Ltd,Spark|Airflow|AWS,Haifa,https://jobs.example.com/apply,en,synthetic example row - delete before labeling

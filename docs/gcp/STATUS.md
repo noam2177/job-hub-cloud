@@ -1,29 +1,32 @@
-# STATUS — 2026-09-28
+# STATUS — 2026-09-28 (end of session)
 
-**Phase:** P2 (local build done, committed first). Then P1+P4 review, then P5. P3 frozen.
+**Phase:** all Cursor-side code for G0, P2, P1, P4, P5 is committed and tested (105 tests, 0 skipped).
+Next is Noam's cloud/label work. P3 frozen until P1/P2/P4/P5 run clean.
 
-## Done
-- G0-5/G0-6: repo, secret/RED-path scanner (pre-commit), `.env.example`, RULES, COST_LEDGER, BRIEF v2, DECISIONS D-0..D-10.
-- Task contract v1 + validator; untrusted-input sanitizer (EN/HE injection, bidi, PII redaction).
-- P2: DDL, views (Wilson SQL verified against Python to 1e-9), DQ checks, events with allow-list, exporter
-  (batch load jobs, transient-only retry), backfill with reconciliation and Omer/RED ledger guard, title-family rules
-  (agree 16/16 with a local Ollama golden set).
+## Commits (sequential, reviewed)
+1. `6df1196` G0+P2 — guardrails, contract v1, sanitizer, BigQuery layer.
+2. `f7299fa` P1+P4 — Telegram listener, puller, dispatcher, watcher, infra, systemd.
+3. P5 — ad schema, OCR/VLM engines, structuring, pipeline, eval script, templates.
 
-## Review fixes applied to P2 before commit
-1. Wilson constant used 1.9216 instead of z² = 3.8416; the SQL test that should have caught it was skipped. Fixed + real test.
-2. Response-rate counts now `COUNT(DISTINCT job_id)`.
-3. Exporter retries only transient errors (429/5xx/timeouts).
-4. Backfill test writes state to a temp dir.
+## Review fixes applied before each commit
+- P2: Wilson z² constant (1.9216 → 3.8416) + real SQL-vs-Python test; distinct job counts; transient-only retry.
+- P1+P4: Hub HTTP 429/408 treated as transient (was silently dropping links); publish-failure backoff (was a hot loop);
+  atomic OCR queue writes; healthcheck now restarts (was blocked by `set -e` + non-root user); missing
+  `secretAccessor` binding added; `IPV6_ONLY=1` no longer creates two VMs.
+- P5: state moved out of the Drive bus; path-traversal prefix bug; deterministic image `found` event with
+  `event_id` + title family; prompt delimiter injection; injection scan over all fields; bad contact no longer
+  fails the whole ad; network errors retry instead of going to review.
 
-## In progress / on disk, not committed
-- P1+P4 (listener, puller, dispatcher, watcher, infra, systemd): builder finished, 61 tests passed in its run; Cursor review next.
-- P5: code files only, no tests, `scripts/p5_eval.py` possibly truncated; Cursor completes after P1+P4.
+## Evidence
+- Local VLM smoke (`scripts/p5_smoke.py`, qwen3-vl 8B): 5/5 fields on a synthetic English ad, 56 s cold.
+  Self-reported confidence was 1.0 → not calibrated; real Hebrew ads needed.
+- Backfill dry-run on the synthetic ledger: 8 jobs, 16 events, reconciled.
 
 ## Blocked
 - GLM review: Hub session call cap (`GLM_MAX_CALLS_SESSION`). Issue #14.
 
 ## Open decisions
-D-1, D-2 (taxonomy, allow-list), D-6 (drop Tailscale), D-7 (CV local), D-9 (P3 verifies Spark output).
+D-1, D-2, D-6, D-7, D-9 (see `DECISIONS.md`).
 
 ## Cost to date
-Cloud $0. Local Ollama $0. GLM $0 (blocked).
+Cloud $0. Local Ollama $0. GLM $0.

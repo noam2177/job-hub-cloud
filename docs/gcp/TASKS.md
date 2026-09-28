@@ -21,10 +21,11 @@ GitHub issues: https://github.com/noam2177/job-hub-cloud/issues
 | GC-P2-06 Looker Studio | N (C doc) | todo | 2026-09-28 | `docs/looker_steps.md`, issue #7 |
 | GC-P2-07 single exporter design | C | done | 2026-09-28 | D-8, `BRIEF.md` R2 |
 | GC-P2-08 data-quality checks | C | done | 2026-09-28 | `sql/dq_checks.sql`, `RUNBOOK_P2.md` |
-| GC-P1-01..07 VM, hardening, Pub/Sub, listener, puller, systemd | C | verify (review pending) | 2026-09-28 | on disk, not committed yet |
+| GC-P1-01..07 VM, hardening, Pub/Sub, listener, puller, systemd | C (N runs) | done in code; cloud run pending | 2026-09-28 | commit f7299fa; `RUNBOOK_P1.md`; issue #9 |
 | GC-P1-08 7-day soak | N | todo | 2026-09-28 | issue #10 |
 | GC-P4-01 task schema v1 | C | done | 2026-09-28 | `tests/test_contracts.py` |
-| GC-P4-L1..07 local watcher, dedupe, routing, tests | C | verify (review pending) | 2026-09-28 | on disk, not committed yet |
+| GC-P4-L1..07 local watcher, dedupe, routing, tests | C | done in code; live run pending | 2026-09-28 | commit f7299fa; issue #11 |
 | GC-P5-01 20 labeled ads | N | todo | 2026-09-28 | issue #12 |
-| GC-P5-02..07 schema, OCR, structuring, eval | C | building (partial, no tests) | 2026-09-28 | on disk, not committed yet |
+| GC-P5-02..07 schema, OCR, structuring, eval | C | done in code; eval on real ads pending | 2026-09-28 | `P5_PLAN.md`; local VLM smoke 5/5 fields on a synthetic ad |
+| GC-P5-03 Document AI processor | N | todo (only if local paths miss the bar) | 2026-09-28 | `P5_PLAN.md` |
 | GC-P3-* | C+N | frozen until P1/P2/P4/P5 run clean | 2026-09-28 | `P3_PLAN.md` |
