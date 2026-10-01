@@ -1,33 +1,47 @@
-# STATUS — 2026-09-28 (end of session)
+# STATUS — 2026-10-01 (local audit)
 
-**Phase:** all Cursor-side code for G0, P2, P1, P4, P5 is committed and tested (105 tests, 0 skipped).
-Next is Noam's cloud/label work. P3 frozen until P1/P2/P4/P5 run clean.
+**Update (2026-10-01):** P2 **closed** — canonical `jobs.events` + all views deployed; **146 events** loaded (`--apply`); DQ ok (`out/bq_dq_post_migrate.json`). **Looker** = operator UI (`docs/looker/LOOKER_DATA_SOURCES.md`). P1/P4/P5 unchanged.
 
-## Commits (sequential, reviewed)
-1. `6df1196` G0+P2 — guardrails, contract v1, sanitizer, BigQuery layer.
-2. `f7299fa` P1+P4 — Telegram listener, puller, dispatcher, watcher, infra, systemd.
-3. P5 — ad schema, OCR/VLM engines, structuring, pipeline, eval script, templates.
+# STATUS — 2026-09-30 (handoff)
 
-## Review fixes applied before each commit
-- P2: Wilson z² constant (1.9216 → 3.8416) + real SQL-vs-Python test; distinct job counts; transient-only retry.
-- P1+P4: Hub HTTP 429/408 treated as transient (was silently dropping links); publish-failure backoff (was a hot loop);
-  atomic OCR queue writes; healthcheck now restarts (was blocked by `set -e` + non-root user); missing
-  `secretAccessor` binding added; `IPV6_ONLY=1` no longer creates two VMs.
-- P5: state moved out of the Drive bus; path-traversal prefix bug; deterministic image `found` event with
-  `event_id` + title family; prompt delimiter injection; injection scan over all fields; bad contact no longer
-  fails the whole ad; network errors retry instead of going to review.
+**Phase:** G0 + P2 **cloud foundation** and **local dry-run backfill** reported complete by operator. Application code for P1, P4, P5 is committed (**105 pytest**, 0 skipped). **Not live yet:** BigQuery load (`--apply`), Telegram bridge VM, local puller/watcher, P5 Hebrew eval gate.
 
-## Evidence
-- Local VLM smoke (`scripts/p5_smoke.py`, qwen3-vl 8B): 5/5 fields on a synthetic English ad, 56 s cold.
-  Self-reported confidence was 1.0 → not calibrated; real Hebrew ads needed.
-- Backfill dry-run on the synthetic ledger: 8 jobs, 16 events, reconciled.
+P3 remains frozen until P1/P2/P4/P5 run clean in production-like conditions.
 
-## Blocked
-- GLM review: Hub session call cap (`GLM_MAX_CALLS_SESSION`). Issue #14.
+## Executive position
 
-## Decisions
-Approved 2026-09-28: D-1, D-2, D-11 (title families), D-6 (no Tailscale), D-7 (CV local only), D-9 (P3 verifies Spark).
-Open: none.
+| Layer | State | Notes |
+|---|---|---|
+| GCP project `project-471f7026-7c4b-401b-8a8` | Operator: APIs + 3 SAs + dataset `jobs` + DDL/views | Agent cannot call `gcloud`/`bq` from this host (CLI not on PATH) |
+| Auth | Operator: ADC + impersonation `sa-local-puller@…` | No JSON keys in repo (R5 ✓) |
+| P2 ledger → events | Operator: dry-run **111 jobs**, `reconciled: true` | Agent did not read `jobs.json` (R1/D-7); save report to `out/p2_dry_run.json` for audit |
+| P2 BigQuery rows | **Empty until `--apply`** | `state/export_state.json` absent → apply not run yet |
+| P1 Telegram + VM | Not deployed | Token not in Secret Manager (GC-G0-4) |
+| P4 watcher | Not live | `inbox_raw/` + `JOBHUB_WATCHER=1` pending |
+| P5 OCR | Code + smoke (English synthetic); Hebrew pilot open | `data/ads/` gitignored; eval harness `scripts/p5_eval.py` |
+| Cost | Cloud **$0** usage so far (loads not applied) | Trial ₪891, expiry **2026-12-04**, $10 budget alerts on |
+
+## Code review (autonomous, 2026-09-30)
+
+- **R1 / D-2:** `jobs_pipeline/events.py` exports only allow-listed payload keys; `sanitize.py` redacts PII before LLM; `backfill.py` refuses non-career ledger paths.
+- **R8:** No auto-submit paths in pipeline; Hub owns `jobs.json` via loopback only (`RULES.md` R2).
+- **R6:** Steady-state estimate ~$3.7/mo (mostly VM IPv4); Document AI reserved for P5 fallback per `P5_PLAN.md`.
+- **Infra:** `infra/00_project.sh`, `01_apis.sh`, `10_bq.sh`, `20_vm.sh`, `21_harden.sh`, `30_pubsub.sh` + systemd units ready; all default `DRY_RUN=1`.
+
+## Commits (reviewed)
+
+1. `6df1196` G0+P2 · 2. `f7299fa` P1+P4 · 3. `783423d` P5 · 4. `22b666b` decisions
+
+## Prior automated evidence
+
+- Synthetic backfill: 8 jobs, 16 events, reconciled (tests).
+- VLM smoke (`scripts/p5_smoke.py`): 5/5 fields on synthetic English ad.
+
+## Blocked / optional
+
+- GLM repo review: Hub `GLM_MAX_CALLS_SESSION` (issue #14).
+- P5 GCP eval paths: need `JOBHUB_ALLOW_GCP_EVAL=1` + explicit approval if local < 90%.
 
 ## Cost to date
-Cloud $0. Local Ollama $0. GLM $0.
+
+Cloud $0 (no `--apply`, no VM). Local Ollama $0 for completed Hebrew eval (not finished).

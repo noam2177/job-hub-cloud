@@ -9,8 +9,8 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
-from jobs_pipeline.bq_exporter import Exporter
 from jobs_pipeline.events import derive_events, load_jobs, load_outcomes
+from jobs_pipeline.incremental_sync import run_incremental_sync
 
 
 def _load_state(path: Path) -> dict[str, Any]:
@@ -69,32 +69,32 @@ def run_backfill(
     jobs = load_jobs(jobs_path)
     outcomes = load_outcomes(outcomes_path) if outcomes_path else []
     state = _load_state(state_path)
-    events, new_state = derive_events(jobs, outcomes, state)
-    report = build_report(jobs, events)
-    report["event_count"] = len(events)
-    if not apply:
-        report["dry_run"] = True
-        return report
-
     project = os.environ.get("GCP_PROJECT_ID")
-    if not project:
+    if apply and not project:
         print("GCP_PROJECT_ID is required for --apply", file=sys.stderr)
         sys.exit(2)
 
-    exporter = Exporter(client=None, project_id=project)
-    try:
-        from google.cloud import bigquery
+    client = None
+    if apply:
+        try:
+            from google.cloud import bigquery
 
-        client = bigquery.Client(project=project)
-        exporter = Exporter(client=client, project_id=project)
-    except ImportError:
-        print("google-cloud-bigquery is required for --apply", file=sys.stderr)
-        sys.exit(2)
+            client = bigquery.Client(project=project)
+        except ImportError:
+            print("google-cloud-bigquery is required for --apply", file=sys.stderr)
+            sys.exit(2)
 
-    load_report = exporter.export(events, dry_run=False)
-    report["export"] = load_report
-    _save_state(state_path, new_state)
-    report["dry_run"] = False
+    report = run_incremental_sync(
+        jobs_path,
+        state,
+        outcomes_path=outcomes_path,
+        project_id=project or "noam-job-hub-123",
+        client=client,
+        apply=apply,
+    )
+    new_state = report.pop("_state", None)
+    if new_state is not None:
+        _save_state(state_path, new_state)
     return report
 
 
