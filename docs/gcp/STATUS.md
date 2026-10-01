@@ -1,6 +1,6 @@
 # STATUS — 2026-10-01 (local audit)
 
-**Update (2026-10-01):** P2 **closed** — canonical `jobs.events` + all views deployed; **146 events** loaded (`--apply`); DQ ok (`out/bq_dq_post_migrate.json`). **Looker** = operator UI (`docs/looker/LOOKER_DATA_SOURCES.md`). P1/P4/P5 unchanged.
+**Update (2026-10-01):** P2 **closed** — canonical `jobs.events` + all views deployed via ADC (`scripts/ensure_bq_resources.py`); ledger synced (**147** events in BQ, `rows_to_append: 0`); DQ ok (`out/bq_dq_verify.json`). Project id: `noam-job-hub-123`. **Looker** = operator UI (`docs/looker/LOOKER_DATA_SOURCES.md`). P1/P4/P5 unchanged.
 
 # STATUS — 2026-09-30 (handoff)
 
