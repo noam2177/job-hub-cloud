@@ -11,6 +11,7 @@ from urllib import request
 from urllib.error import HTTPError, URLError
 
 from jobs_pipeline.net_loopback import assert_loopback_base_url
+from jobs_pipeline.ollama_retry import urlopen_with_retry
 
 DOCAI_COST_PER_PAGE = 0.0015
 
@@ -98,9 +99,9 @@ class LocalVlmOcr:
             method="POST",
         )
         try:
-            with self._urlopen(req, timeout=120) as resp:
+            with urlopen_with_retry(self._urlopen, req, timeout=120) as resp:
                 raw = resp.read().decode("utf-8")
-        except (HTTPError, URLError, TimeoutError) as exc:
+        except (HTTPError, URLError, TimeoutError, ConnectionError) as exc:
             raise RuntimeError(f"Ollama VLM OCR failed: {exc}") from exc
         data = json.loads(raw)
         text = str((data.get("message") or {}).get("content") or "").strip()

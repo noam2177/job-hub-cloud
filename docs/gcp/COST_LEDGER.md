@@ -7,12 +7,12 @@ Budget and payment settings are handled by Noam in the Console only.
 
 | Item | Value |
 |---|---|
-| Credit amount | $300 (verify in Console) |
-| Credit start date | _Noam fills_ |
-| Credit expiry date | _Noam fills_ |
-| Last day to create resources (expiry − 10 d) | _computed_ |
-| Day-80 go/no-go (upgrade or tear down) | _computed_ |
-| Budget alerts 50 / 90 / 100% created | _yes/no + screenshot ref_ |
+| Credit amount | **₪891** (per Noam Console 2026-09-30) |
+| Credit start date | _record from Console if not already noted_ |
+| Credit expiry date | **2026-12-04** (per Noam Console 2026-09-30) |
+| Last day to create resources (expiry − 10 d) | **2026-11-24** |
+| Day-80 go/no-go (upgrade or tear down) | _set calendar from credit start + 80 d_ |
+| Budget alerts 50 / 90 / 100% created | **yes** — Noam verified in Console 2026-09-30 |
 
 ## Expected monthly run cost
 
@@ -24,7 +24,7 @@ Budget and payment settings are handled by Noam in the Console only.
 | Secret Manager | ~0.06 | 1 secret version + access ops |
 | BigQuery | 0 | load jobs free; tiny storage/queries |
 | Looker Studio | 0 | |
-| Document AI OCR (P5 eval, 20 ads) | ~0.03 | one-off |
+| Document AI OCR (P5 eval, 20 ads) | ~0.03 | one-off; Vision free tier is separate from P5 code path |
 | Gemini Flash (P5 eval) | < 0.05 | one-off |
 | GLM reviews | < 0.20 | Hub spend ledger |
 | **Total steady state** | **~3.7** | |
@@ -34,3 +34,5 @@ Budget and payment settings are handled by Noam in the Console only.
 | Date | Action | Who | Cost | Evidence |
 |---|---|---|---|---|
 | 2026-09-28 | Repo, code, tests, local Ollama runs | Cursor | $0 cloud | `STATUS.md` |
+| 2026-09-30 | $10 budget + alerts 50/90/100% | Noam | $0 | Console |
+| 2026-09-30 | Trial ledger: ₪891, expiry 2026-12-04 | Noam | $0 | this table |

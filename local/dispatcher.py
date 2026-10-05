@@ -137,6 +137,12 @@ class HubLinkHandler:
 
     def handle(self, task: dict[str, Any]) -> Outcome:
         url = task["payload"]["url"]
+        try:
+            from integrations.scraping_hub_client import cache_extract
+
+            cache_extract(url)
+        except Exception:
+            pass
         body = json.dumps({"url": url}).encode("utf-8")
         req = urllib.request.Request(
             self._link_url,

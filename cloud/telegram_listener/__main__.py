@@ -17,7 +17,9 @@ from cloud.telegram_listener.listener import (
 
 def main() -> None:
     state = Path(os.environ.get("JOBHUB_STATE_DIR", "/var/lib/jobhub"))
-    allowed_raw = os.environ.get("TELEGRAM_ALLOWED_CHAT_IDS", "")
+    allowed_raw = os.environ.get("TELEGRAM_INTAKE_ALLOWED_CHAT_IDS") or os.environ.get(
+        "TELEGRAM_ALLOWED_CHAT_IDS", ""
+    )
     allowed = {int(x.strip()) for x in allowed_raw.split(",") if x.strip()}
     if not allowed:
         raise SystemExit("TELEGRAM_ALLOWED_CHAT_IDS required")

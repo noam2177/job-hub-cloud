@@ -15,6 +15,7 @@ from pydantic import ValidationError
 from jobs_pipeline.ad_schema import JobAd, json_schema
 from jobs_pipeline.llm_json import parse_json_from_llm
 from jobs_pipeline.net_loopback import assert_loopback_base_url
+from jobs_pipeline.ollama_retry import urlopen_with_retry
 from jobs_pipeline.sanitize import clean
 
 
@@ -120,9 +121,9 @@ class OllamaLlm:
             method="POST",
         )
         try:
-            with self._urlopen(req, timeout=120) as resp:
+            with urlopen_with_retry(self._urlopen, req, timeout=120) as resp:
                 raw = resp.read().decode("utf-8")
-        except (HTTPError, URLError, TimeoutError) as exc:
+        except (HTTPError, URLError, TimeoutError, ConnectionError) as exc:
             raise RuntimeError(f"Ollama LLM failed: {exc}") from exc
         data = json.loads(raw)
         return str((data.get("message") or {}).get("content") or "")
