@@ -15,7 +15,9 @@ run() {
   fi
 }
 
-run gcloud builds submit "${ROOT}" --config "${ROOT}/cloud/bq_sync/cloudbuild.yaml"
+run gcloud builds submit "${ROOT}" \
+  --project "${PROJECT}" \
+  --config "${ROOT}/cloud/bq_sync/cloudbuild.yaml"
 run gcloud run jobs deploy "${SERVICE_NAME}" \
   --image "${IMAGE}" \
   --region "${REGION}" \

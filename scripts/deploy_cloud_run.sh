@@ -33,8 +33,7 @@ run gcloud services enable \
 echo "=== Build image ==="
 run gcloud builds submit "${ROOT}" \
   --project="${PROJECT}" \
-  --tag "${IMAGE}" \
-  --file "${ROOT}/cloud/bq_sync/Dockerfile"
+  --config "${ROOT}/cloud/bq_sync/cloudbuild.yaml"
 
 echo "=== Deploy Cloud Run Service (free-tier caps) ==="
 run gcloud run deploy "${SERVICE_NAME}" \
