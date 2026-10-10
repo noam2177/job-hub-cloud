@@ -1,0 +1,11 @@
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - -f
+      - cloud/bq_sync/Dockerfile
+      - -t
+      - gcr.io/$PROJECT_ID/jobhub-bq-sync:latest
+      - .
+images:
+  - gcr.io/$PROJECT_ID/jobhub-bq-sync:latest

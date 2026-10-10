@@ -15,13 +15,12 @@ run() {
   fi
 }
 
-run gcloud builds submit "${ROOT}" --tag "${IMAGE}" --file "${ROOT}/cloud/bq_sync/Dockerfile"
+run gcloud builds submit "${ROOT}" --config "${ROOT}/cloud/bq_sync/cloudbuild.yaml"
 run gcloud run jobs deploy "${SERVICE_NAME}" \
   --image "${IMAGE}" \
   --region "${REGION}" \
   --service-account "sa-bq-exporter@${PROJECT}.iam.gserviceaccount.com" \
-  --set-env-vars "GCP_PROJECT_ID=${PROJECT}" \
-  --set-env-vars "JOBHUB_LEDGER_GCS_URI=gs://${PROJECT}-ledger-backup/ledger/jobs.json" \
+  --set-env-vars "GCP_PROJECT_ID=${PROJECT},JOBHUB_LEDGER_GCS_URI=gs://${PROJECT}-ledger-backup/ledger/jobs.json,JOBHUB_RUN_MODE=job" \
   --max-retries 1 \
   --task-timeout 10m \
   --memory 512Mi
